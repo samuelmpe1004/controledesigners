@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>PAINEL DO ADMINISTRADOR</h2>
+    <p>BEM-VINDO(A) AO PAINEL DE ADMINISTRAÇÃO!</p>
+    
+    <div class="admin-actions">
+        <a href="{{ url_for('auth_bp.admin_logout') }}" class="admin-logout-link">LOGOUT DO ADMINISTRADOR</a>
+    </div>
+
+    <h3>USUÁRIOS CADASTRADOS</h3>
+
+    {% if users %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOME DE USUÁRIO</th>
+                    <th>STATUS</th>
+                    <th>AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{% if user.is_blocked %}BLOQUEADO{% else %}ATIVO{% endif %}</td>
+                        <td>
+                            {% if user.is_blocked %}
+                                <a href="{{ url_for('main_bp.unblock_user', user_id=user.id) }}" class="block-button">DESBLOQUEAR</a>
+                            {% else %}
+                                <a href="{{ url_for('main_bp.block_user', user_id=user.id) }}" class="block-button">BLOQUEAR</a>
+                            {% endif %}
+                            <a href="{{ url_for('main_bp.reset_password', user_id=user.id) }}" 
+                               class="reset-password-button"
+                               onclick="return confirm('TEM CERTEZA QUE DESEJA RESETAR A SENHA DESTE USUÁRIO?');">
+                               RESETAR SENHA
+                            </a>
+                            <a href="{{ url_for('main_bp.delete_user', user_id=user.id) }}" 
+                               onclick="return confirm('TEM CERTEZA QUE DESEJA EXCLUIR ESTE USUÁRIO? ESTA AÇÃO NÃO PODE SER DESFEITA E TODAS AS FICHAS ASSOCIADAS SERÃO EXCLUÍDAS.');"
+                               class="delete-button">EXCLUIR</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>NENHUM USUÁRIO CADASTRADO.</p>
+    {% endif %}
+{% endblock %}

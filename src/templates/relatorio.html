@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ title }}</h2>
+    <div class="report-filters">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.data_inicio.label }}<br>
+                {{ form.data_inicio() }}
+                {% for error in form.data_inicio.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.data_fim.label }}<br>
+                {{ form.data_fim() }}
+                {% for error in form.data_fim.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.nome_cliente.label }}<br>
+                {{ form.nome_cliente(size=50, list="clientes-list") }}
+                <datalist id="clientes-list"></datalist>
+                {% for error in form.nome_cliente.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.submit() }}
+            </div>
+        </form>
+    </div>
+
+    {% if fichas is not none %}
+        <div class="report-results">
+            <h3>RESULTADOS DO RELATÓRIO</h3>
+            {% if data_inicio and data_fim %}
+                <p><strong>PERÍODO:</strong> {{ data_inicio.strftime("%d/%m/%Y") }} - {{ data_fim.strftime("%d/%m/%Y") }}</p>
+            {% endif %}
+            {% if nome_cliente_filtro %}
+                <p><strong>CLIENTE:</strong> {{ nome_cliente_filtro }}</p>
+            {% endif %}
+            <p><strong>TOTAL DE METRAGEM PRODUZIDA:</strong> {{ "%.2f"|format(total_metragem) }} METROS</p>
+            
+            {% if fichas %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>DATA DE LIBERAÇÃO</th>
+                            <th>CLIENTE</th>
+                            <th>TIPO DE TECIDO</th>
+                            <th>METRAGEM</th>
+                            <th>DESIGNER QUE LIBEROU</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ficha in fichas %}
+                            <tr>
+                                <td>{{ ficha.data_liberacao.strftime("%d/%m/%Y") }}</td>
+                                <td>{{ ficha.nome_cliente }}</td>
+                                <td>{{ ficha.tipo_tecido }}</td>
+                                <td>{{ "%.2f"|format(ficha.metragem_liberada) }}</td>
+                                <td>{{ ficha.designer_liberou }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>NENHUMA FICHA ENCONTRADA PARA OS CRITÉRIOS SELECIONADOS.</p>
+            {% endif %}
+            
+            <div class="warning-message">
+                <strong>ATENÇÃO:</strong> ESTE SISTEMA É APENAS PARA TER UMA PROJEÇÃO DE SUA PRODUÇÃO, DESCARTANDO QUALQUER PREVISÃO FINANCEIRA.
+            </div>
+        </div>
+    {% endif %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Seleciona o datalist
+        const dataList = document.getElementById("clientes-list");
+        
+        // Faz uma requisição para a API que retorna os nomes dos clientes
+        fetch("{{ url_for('main_bp.api_clientes') }}")
+            .then(response => response.json())
+            .then(data => {
+                // Para cada nome de cliente recebido...
+                data.forEach(nomeCliente => {
+                    // Cria um elemento <option>
+                    const option = document.createElement("option");
+                    // Define o valor do <option> como o nome do cliente
+                    option.value = nomeCliente;
+                    // Adiciona o <option> ao datalist
+                    dataList.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error("Erro ao buscar lista de clientes:", error);
+            });
+    });
+</script>
+{% endblock %}

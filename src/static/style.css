@@ -1,0 +1,885 @@
+/* Estilos CSS inspirados em Stripe, Apple, Mailchimp e Slack - Todos os textos em CAIXA ALTA */
+:root {
+  --primary-color: #3a7bd5;
+  --secondary-color: #00d2ff;
+  --accent-color: #6a11cb;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+  --gradient-dark: linear-gradient(135deg, #2b5876, #4e4376);
+  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* Estilos gerais - inspirados na simplicidade da Apple */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--light-color);
+  color: var(--dark-color);
+  line-height: 1.6;
+  text-transform: uppercase; /* Todos os textos em CAIXA ALTA */
+}
+
+.container {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  max-width: 800px;
+  margin: 20px auto;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Navegação - inspirada no Stripe */
+nav {
+  background: white;
+  padding: 15px 0;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+  display: flex;
+  justify-content: space-between;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav .nav-left {
+  display: flex;
+  text-align: left;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  color: var(--dark-color);
+  padding: 12px 20px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: var(--transition);
+  position: relative;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background: var(--gradient-primary);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+nav ul li a:hover {
+  color: var(--primary-color);
+}
+
+nav ul li a:hover::after {
+  width: 70%;
+}
+
+/* Estilo para o botão administrativo na página de login */
+.admin-panel-container {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.admin-panel-container .admin-button {
+  margin-left: auto;
+}
+
+/* Alertas estilizados - inspirados no Slack */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #f8fffa, #e6ffee);
+  color: var(--success-color);
+  border-left: 4px solid var(--success-color);
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #fff8f8, #ffe6e6);
+  color: var(--danger-color);
+  border-left: 4px solid var(--danger-color);
+}
+
+.alert-info {
+  background: linear-gradient(135deg, #f8fbff, #e6f2ff);
+  color: var(--info-color);
+  border-left: 4px solid var(--info-color);
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Formulários estilizados - inspirados no Mailchimp */
+form div {
+  margin-bottom: 18px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="date"],
+form input[type="number"],
+form textarea,
+form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: var(--transition);
+  text-transform: uppercase; /* Inputs em CAIXA ALTA */
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form input[type="date"]:focus,
+form input[type="number"]:focus,
+form textarea:focus,
+form select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.2);
+  outline: none;
+}
+
+/* Botões com gradiente e efeito hover - inspirados no Stripe */
+form input[type="submit"],
+.button {
+  background: var(--primary-color);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase; /* Botões em CAIXA ALTA */
+}
+
+form input[type="submit"]::before,
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: all 0.6s ease;
+}
+
+form input[type="submit"]:hover,
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  background: var(--accent-color);
+}
+
+form input[type="submit"]:hover::before,
+.button:hover::before {
+  left: 100%;
+}
+
+/* Estilo para links de ação (termos, login, registro) */
+.action-link {
+  display: inline-block;
+  background: linear-gradient(135deg, #009900, #006600);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 153, 0, 0.2);
+  margin: 10px 0;
+  text-align: center;
+}
+
+.action-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 153, 0, 0.3);
+  background: linear-gradient(135deg, #00b300, #008000);
+  color: white;
+  text-decoration: none;
+}
+
+/* Estilo específico para o link de termos */
+.terms-link {
+  color: #009900;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.terms-link:hover {
+  color: #00b300;
+}
+
+.terms-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, #009900, #00b300);
+  transition: all 0.3s ease;
+}
+
+.terms-link:hover::after {
+  width: 100%;
+}
+
+/* Estilo para os links de autenticação */
+.auth-links {
+  margin-top: 25px;
+  text-align: center;
+}
+
+/* Estilo para o container de checkbox */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+/* Ajuste para o botão de submit do formulário */
+form input[type="submit"].button {
+  background: linear-gradient(135deg, #009900, #006600);
+  width: 100%;
+  margin-top: 10px;
+}
+
+form input[type="submit"].button:hover {
+  background: linear-gradient(135deg, #00b300, #008000);
+}
+
+.form-check-input {
+  margin-right: 8px;
+}
+
+.form-check-label {
+  font-weight: normal;
+}
+
+/* Tabelas estilizadas - inspiradas na Apple */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 25px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+table, th, td {
+  border: none;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+th {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: white;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+tr {
+  transition: var(--transition);
+}
+
+tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Links de ação */
+.actions a {
+  margin-right: 10px;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.actions a:hover {
+  color: var(--accent-color);
+}
+
+.no-fichas {
+  text-align: center;
+  color: #777;
+  margin-top: 25px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+}
+
+/* Relatórios */
+.report-filters {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+}
+
+.report-filters label {
+  margin-right: 15px;
+  font-weight: 600;
+}
+
+.report-results {
+  margin-top: 25px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+}
+
+/* Aviso de atenção animado em tons de vermelho */
+.warning-message {
+  margin-top: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffcccc, #ff6666);
+  border: none;
+  color: #990000;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  animation: pulse-warning 3s infinite ease-in-out;
+}
+
+@keyframes pulse-warning {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+  }
+}
+
+.warning-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.warning-message strong {
+  color: #cc0000;
+  font-size: 1.1em;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background: var(--light-color);
+  color: var(--dark-color);
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Botões administrativos */
+.admin-button {
+  background: var(--danger-color);
+  color: white;
+  padding: 10px 18px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
+  display: inline-block;
+}
+
+.admin-button:hover {
+  background: #c82333;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
+}
+
+.button-small {
+  padding: 8px 15px;
+  font-size: 14px;
+}
+
+.button-warning {
+  background: var(--warning-color);
+  color: #212529;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
+}
+
+.button-warning:hover {
+  background: #e0a800;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 193, 7, 0.3);
+}
+
+.button-success {
+  background: var(--success-color);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
+}
+
+.button-success:hover {
+  background: #218838;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+}
+
+.button-danger {
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
+}
+
+.button-danger:hover {
+  background: #c82333;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
+}
+
+/* Logo centralizado na página de login - inspirado no Mailchimp */
+.logo-container {
+  text-align: center;
+  margin: 30px auto 50px;
+  max-width: 300px;
+  position: relative;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  animation: pulse 3s infinite ease-in-out;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Efeito de entrada para elementos da página - inspirado no Stripe */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.fade-in-delay-1 {
+  animation-delay: 0.2s;
+}
+
+.fade-in-delay-2 {
+  animation-delay: 0.4s;
+}
+
+.fade-in-delay-3 {
+  animation-delay: 0.6s;
+}
+
+/* Botão de logout do administrador em vermelho */
+.admin-logout-link {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff4d4d, #cc0000);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(204, 0, 0, 0.2);
+  margin: 10px 0;
+  text-align: center;
+}
+
+.admin-logout-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(204, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ff6666, #ff0000);
+  color: white;
+  text-decoration: none;
+}
+
+/* Botão de voltar para login de usuário em vermelho */
+.back-to-login-link {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff4d4d, #cc0000);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(204, 0, 0, 0.2);
+  margin: 10px 0;
+  text-align: center;
+}
+
+.back-to-login-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(204, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ff6666, #ff0000);
+  color: white;
+  text-decoration: none;
+}
+
+/* Botões de ação do administrador (bloquear/excluir) */
+.admin-action-link {
+  display: inline-block;
+  color: #cc0000;
+  font-weight: 600;
+  text-decoration: none;
+  margin-right: 15px;
+  transition: all 0.3s ease;
+}
+
+.admin-action-link:hover {
+  color: #ff0000;
+  text-decoration: underline;
+}
+
+/* Botão de bloquear/desbloquear */
+.block-button, .bloquear {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff6b6b, #cc0000);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(204, 0, 0, 0.2);
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.block-button:hover, .bloquear:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(204, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ff8080, #ff0000);
+}
+
+/* Botão de excluir */
+.delete-button, .excluir {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff4d4d, #990000);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(153, 0, 0, 0.2);
+  font-size: 12px;
+}
+
+.delete-button:hover, .excluir:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(153, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ff6666, #cc0000);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  nav {
+    flex-direction: column;
+  }
+  
+  nav .nav-left {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  nav ul li a {
+    padding: 8px 12px;
+    margin: 2px;
+  }
+  
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .logo-container {
+    max-width: 200px;
+  }
+  
+  .admin-panel-container {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+}
+
+/* Estilo para o link de esqueci minha senha */
+.esqueci-senha {
+  color: #cc0000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.esqueci-senha:hover {
+  text-decoration: underline;
+}
+
+/* Estilo para o modal de esqueci minha senha */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+}
+
+.modal-content {
+  background: white;
+  margin: 15% auto;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: #cc0000;
+}
+
+/* Novos estilos para os botões específicos */
+
+/* Botão RESETAR SENHA */
+.resetar-senha, a[href*="reset-password"], a[href*="reset_password"] {
+  display: inline-block;
+  background: linear-gradient(135deg, #80b3ff, #0066cc);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.2);
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.resetar-senha:hover, a[href*="reset-password"]:hover, a[href*="reset_password"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+  background: linear-gradient(135deg, #99c2ff, #0080ff);
+  color: white;
+  text-decoration: none;
+}
+
+/* Link REGISTRE-SE AQUI */
+a[href*="registre-se"], a[href*="register"] {
+  color: #009900;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+a[href*="registre-se"]:hover, a[href*="register"]:hover {
+  color: #00b300;
+}
+
+a[href*="registre-se"]::after, a[href*="register"]::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, #009900, #00b300);
+  transition: all 0.3s ease;
+}
+
+a[href*="registre-se"]:hover::after, a[href*="register"]:hover::after {
+  width: 100%;
+}
+
+/* Botão ENTRAR */
+.entrar, a[href*="entrar"] {
+  display: inline-block;
+  width: 100%;
+  background: linear-gradient(135deg, #009900, #006600);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 153, 0, 0.2);
+  margin: 10px 0;
+  text-align: center;
+}
+
+.entrar:hover, a[href*="entrar"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 153, 0, 0.3);
+  background: linear-gradient(135deg, #00b300, #008000);
+  color: white;
+  text-decoration: none;
+}
+
+/* Botão ADICIONAR NOVA FICHA */
+a[href*="adicionar_ficha"], a[href*="adicionar"] {
+  display: inline-block;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(58, 123, 213, 0.2);
+  margin: 10px 0;
+  text-align: center;
+}
+
+a[href*="adicionar_ficha"]:hover, a[href*="adicionar"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(58, 123, 213, 0.3);
+  background: linear-gradient(135deg, #4a8be5, #33d6ff);
+  color: white;
+  text-decoration: none;
+}

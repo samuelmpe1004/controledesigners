@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Termos de Uso - Controle de Fichas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>TERMO DE USO PESSOAL DO SISTEMA DE CONTROLE DE PRODUÇÃO</h2>
+    
+    <div class="card mt-4">
+        <div class="card-body">
+            <p>Este sistema foi desenvolvido por Samuel Nascimento de Sousa, colaborador da empresa F Designer, com o objetivo exclusivo de registrar e acompanhar sua produção pessoal diária.</p>
+            
+            <p>A empresa F Designer não possui qualquer vínculo oficial com este sistema, não sendo responsável por seus dados, funcionamento ou consequências de seu uso. O uso do sistema é totalmente opcional e de responsabilidade individual de cada colaborador que optar por utilizá-lo.</p>
+            
+            <p>Ao continuar, você declara estar ciente de que:</p>
+            
+            <ul>
+                <li>O sistema não substitui registros oficiais da empresa, como folha de ponto, metas, comissões ou relatórios de desempenho;</li>
+                <li>Os dados registrados não têm valor legal, salvo se reconhecidos oficialmente pela empresa;</li>
+                <li>O uso é pessoal e voluntário, sendo sua responsabilidade garantir a veracidade e confidencialidade das informações inseridas.</li>
+            </ul>
+            
+            <hr>
+            
+            <p>Ao clicar em "Aceitar e Continuar" no formulário de registro, você concorda com estes termos.</p>
+            
+            <a href="{{ url_for('auth_bp.register') }}" class="btn btn-secondary">Voltar para o Registro</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base_login.html" %}
+
+{% block content %}
+    <h2>PÁGINA DE REGISTRO</h2>
+    <form method="POST" action="" id="registrationForm">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.nome_completo.label }}<br>
+            {{ form.nome_completo(size=32) }}<br>
+            {% for error in form.nome_completo.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.cpf.label }}<br>
+            {{ form.cpf(size=14, maxlength=11, oninput="this.value = this.value.replace(/[^0-9]/g, '')") }}<br>
+            {% for error in form.cpf.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.data_nascimento.label }}<br>
+            {{ form.data_nascimento(type="date") }}<br>
+            {% for error in form.data_nascimento.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.apelido.label }}<br>
+            {{ form.apelido(size=32) }}<br>
+            {% for error in form.apelido.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(size=32) }}<br>
+            {% for error in form.confirm_password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div class="checkbox-container">
+            {{ form.aceitar_termos() }} {{ form.aceitar_termos.label }}<br>
+            {% for error in form.aceitar_termos.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            <a href="{{ url_for('auth_bp.termos') }}" class="terms-link" target="_blank">LEIA OS TERMOS DE USO</a>
+        </div>
+        <div>
+            {{ form.submit(class="button") }}
+        </div>
+    </form>
+    <div class="auth-links">
+        <p>JÁ TEM UMA CONTA? <a href="{{ url_for('auth_bp.login') }}" class="action-link">FAÇA LOGIN AQUI</a></p>
+    </div>
+
+    <script>
+        // Validação adicional para o campo de CPF
+        document.addEventListener('DOMContentLoaded', function() {
+            const cpfInput = document.querySelector('input[name="cpf"]');
+            
+            cpfInput.addEventListener('keypress', function(e) {
+                // Permite apenas números
+                if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+            
+            // Limpa qualquer caractere não numérico que possa ter sido colado
+            cpfInput.addEventListener('paste', function(e) {
+                setTimeout(function() {
+                    cpfInput.value = cpfInput.value.replace(/[^0-9]/g, '');
+                }, 0);
+            });
+        });
+    </script>
+{% endblock %}

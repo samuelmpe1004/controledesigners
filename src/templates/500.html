@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Erro 500 - Erro Interno do Servidor</h2>
+    <p>Ocorreu um erro inesperado no servidor. Nossa equipe já foi notificada.</p>
+    <p>Por favor, tente novamente mais tarde ou <a href="{{ url_for("main_bp.index") }}">volte para a página inicial</a>.</p>
+{% endblock %}

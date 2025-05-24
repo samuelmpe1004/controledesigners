@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="fade-in">{{ title }}</h2>
+    {% if current_user.is_authenticated %}
+        <p class="fade-in fade-in-delay-1">BEM-VINDO(A), {% if current_user.apelido %}{{ current_user.apelido }}{% else %}{{ current_user.username }}{% endif %}!</p>
+    {% endif %}
+    <p class="fade-in fade-in-delay-2"><a href="{{ url_for('main_bp.adicionar_ficha') }}" class="button">ADICIONAR NOVA FICHA</a></p>
+
+    <h3 class="fade-in fade-in-delay-3">SUAS FICHAS DE LIBERAÇÃO</h3>
+    {% if fichas %}
+        <table>
+            <thead>
+                <tr>
+                    <th>DATA DE LIBERAÇÃO</th>
+                    <th>CLIENTE</th>
+                    <th>TIPO DE TECIDO</th>
+                    <th>METRAGEM</th>
+                    <th>DESIGNER QUE LIBEROU</th>
+                    <th>AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ficha in fichas %}
+                    <tr>
+                        <td>{{ ficha.data_liberacao.strftime("%d/%m/%Y") }}</td>
+                        <td>{{ ficha.nome_cliente }}</td>
+                        <td>{{ ficha.tipo_tecido }}</td>
+                        <td>{{ "%.2f"|format(ficha.metragem_liberada) }}</td>
+                        <td>{{ ficha.designer_liberou }}</td>
+                        <td>
+                            <a href="{{ url_for('main_bp.excluir_ficha', ficha_id=ficha.id) }}" 
+                               onclick="return confirm('TEM CERTEZA QUE DESEJA EXCLUIR ESTA FICHA? ESTA AÇÃO NÃO PODE SER DESFEITA.');"
+                               class="button button-small button-danger">EXCLUIR</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-fichas">VOCÊ AINDA NÃO ADICIONOU NENHUMA FICHA DE LIBERAÇÃO.</p>
+    {% endif %}
+{% endblock %}

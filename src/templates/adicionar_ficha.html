@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ title }}</h2>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.nome_cliente.label }}<br>
+            {# ALTERADO: Adicionado o atributo list="clientes-list" para conectar ao datalist (Item 5) #}
+            {{ form.nome_cliente(size=50, list="clientes-list") }}<br>
+            {# INÍCIO: Adicionado datalist para sugestões de nome do cliente (Item 5) #}
+            <datalist id="clientes-list"></datalist>
+            {# FIM: Adicionado datalist #}
+            {% for error in form.nome_cliente.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.tipo_tecido.label }}<br>
+            {{ form.tipo_tecido(size=50) }}<br>
+            {% for error in form.tipo_tecido.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.metragem_liberada.label }}<br>
+            {{ form.metragem_liberada(step="0.01") }}<br>
+            {% for error in form.metragem_liberada.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.data_liberacao.label }}<br>
+            {{ form.data_liberacao() }}<br>
+            {% for error in form.data_liberacao.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        
+        {# Campo Adicionado - Designer que Liberou (Item 3 da sua lista) #}
+        <div> 
+            {{ form.designer_liberou.label }}<br>
+            {{ form.designer_liberou(size=50) }}
+            {% for error in form.designer_liberou.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+
+{# INÍCIO: Script JavaScript para buscar e popular o datalist de clientes (Item 5) #}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Seleciona o datalist
+        const dataList = document.getElementById("clientes-list");
+        
+        // Faz uma requisição para a API que retorna os nomes dos clientes
+        fetch("{{ url_for('main_bp.api_clientes') }}") // Usa url_for para gerar o URL da API dinamicamente
+            .then(response => response.json()) // Converte a resposta para JSON
+            .then(data => {
+                // Para cada nome de cliente recebido...
+                data.forEach(nomeCliente => {
+                    // Cria um elemento <option>
+                    const option = document.createElement("option");
+                    // Define o valor do <option> como o nome do cliente
+                    option.value = nomeCliente;
+                    // Adiciona o <option> ao datalist
+                    dataList.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error("Erro ao buscar lista de clientes:", error);
+            });
+    });
+</script>
+{# FIM: Script JavaScript #}
+
+{% endblock %}

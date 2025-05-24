@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Erro 404 - Página Não Encontrada</h2>
+    <p>A página que você está procurando não existe. Verifique o endereço ou <a href="{{ url_for('main_bp.index') }}">volte para a página inicial</a>.</p>
+{% endblock %}

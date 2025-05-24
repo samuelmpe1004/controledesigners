@@ -1,0 +1,29 @@
+{% extends "base_login.html" %}
+
+{% block content %}
+    <h2>LOGIN DO ADMINISTRADOR</h2>
+    <p>POR FAVOR, INSIRA AS CREDENCIAIS DE ADMINISTRADOR.</p>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.submit(class="button") }}
+        </div>
+    </form>
+    <div class="auth-links">
+        <p><a href="{{ url_for('auth_bp.login') }}" class="back-to-login-link">VOLTAR PARA O LOGIN DE USUÁRIO</a></p>
+    </div>
+{% endblock %}
